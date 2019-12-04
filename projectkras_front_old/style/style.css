@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.container {
+    height: 1000px;
+    width: 100%;
+}
+
+.nav {
+    height: 100px;
+    width: 100%;
+    background-color: black;
+}
+
+.nav>a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 14px 25px;
+    position: relative;
+    top: 30px;
+}
+
+.inloggen {}
+
+.overons {
+    height: 100px;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    width: 100%;
+    height: 400px;
+}
+
+.header {
+    height: 400px;
+    width: 700px;
+    background-color: #f7f4f2;
+}
+
+#welkom {
+    position: relative;
+    left: 100px;
+}
+
+#op {
+    position: relative;
+    left: 190px;
+}
+
+#kras {
+    position: relative;
+    left: 200px;
+}
+
+.overons {
+    height: 400px;
+    width: 100%;
+    background-color: #f7f4f2;
+}
+
+.footer {
+    height: 100px;
+    width: 100%;
+    background-color: #aab2bd;
+}
+
+
+/**slideshow*/
+
+#slideshow {
+    overflow: hidden;
+    height: 400px;
+    width: 600px;
+}
+
+.slide-wrapper {
+    height: 400px;
+    width: 2912px;
+    -webkit-animation: slide 14s ease infinite;
+}
+
+.slide {
+    float: left;
+    height: 400px;
+    width: 600px;
+    background-color: white;
+}
+
+@-webkit-keyframes slide {
+    20% {
+        margin-left: 0px;
+    }
+    30% {
+        margin-left: -600px;
+    }
+    50% {
+        margin-left: -600px;
+    }
+    60% {
+        margin-left: -1200px;
+    }
+    70% {
+        margin-left: -1200px;
+    }
+    80% {
+        margin-left: -1800px;
+    }
+    90% {
+        margin-left: -1800px;
+    }
+}
+
+
+/**pakketen*/
+
+#pakketen {
+    height: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f7f4f2;
+}
+
+.pakket {
+    height: 600px;
+    width: 400px;
+    background-color: grey;
+}
+
+.info {
+    height: 400px;
+    width: 400px;
+}
+
+.read {
+    height: 200px;
+    width: 400px;
+}
+
+
+/* Style inputs, select elements and textareas */
+
+input[type=text],
+input[type=password],
+input[type=email],
+select,
+textarea {
+    width: 300px;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    resize: vertical;
+    margin-bottom: 10px;
+    display: block;
+}
+
+
+/* Style the label to display next to the inputs */
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+
+/* Style the submit button */
+
+input[type=submit],
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 10px;
+}
