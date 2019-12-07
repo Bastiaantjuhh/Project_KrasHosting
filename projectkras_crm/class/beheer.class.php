@@ -10,7 +10,7 @@ class Beheer {
             $content .= "<tr>";
             $content .= "<td>" . htmlspecialchars($x["voornaam"]) ."</td>";
             $content .= "<td>" . htmlspecialchars($x["achternaam"]) ."</td>";
-            $content .= "<td><a href='medewerker_beheer_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
+            $content .= "<td><a role='button' class='btn btn-primary btn-sm' href='medewerker_beheer_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
             $content .= "</tr>";
         }
     

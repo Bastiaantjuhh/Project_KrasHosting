@@ -1,4 +1,0 @@
-- Databases her-structureren, gebruik maken van juiste charset en niet overal Int of Varchat(255) zomaar gebruiken.
-- BUG FIX: Login redbox in CMS
-- BUG FIX: Login dat niet werkt in CRM systeem
-- 

@@ -23,7 +23,7 @@ if ($rechten->getRechten("r_admin", $_SESSION["medewerker"]) === "0") {
         $content .= '<h1 class="mt-4">Medewerker Rechten</h1>';
         $content .= '<form method="POST" action="">';
         $content .= $rechten->getRechtenLijst($_GET["id"]);
-        $content .= '<input type="submit" value="Rechten opslaan">';
+        $content .= '<button type="submit" class="btn btn-primary btn-sm">Opslaan</button></form>';
         $content .= '</form>';
     }
 }

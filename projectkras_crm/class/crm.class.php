@@ -15,7 +15,7 @@ class CRM {
         $content .= "<tr>";
         $content .= "<td>" . htmlspecialchars($x["voornaam"]) ."</td>";
         $content .= "<td>" . htmlspecialchars($x["achternaam"]) ."</td>";
-        $content .= "<td><a href='klanten_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
+        $content .= "<td><a role='button' class='btn btn-primary btn-sm' href='klanten_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
         $content .= "</tr>";
         }
     
@@ -63,7 +63,7 @@ class CRM {
             $content .= "</tr>";
             $content .= "<tr>";
                 $content .= "<td></td>";
-                $content .= "<td><a href='klanten_naar_archief.php?id=" . htmlspecialchars($x["id"]) ."'>Archieveer</a></td>";
+                $content .= "<td><a role='button' class='btn btn-danger btn-sm' href='klanten_naar_archief.php?id=". htmlspecialchars($x["id"])."'>Archieveer</a></td>";
             $content .= "</tr>";
         }
     
