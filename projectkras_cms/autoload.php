@@ -14,12 +14,15 @@ if ($debug === true) {
     error_reporting(E_ALL);
 }
 
-foreach (glob("class/*.php") as $bestend) { include $bestend; }
+foreach (glob("cms/class/*.php") as $bestend) { include $bestend; }
 
 $mysql              = new mysqli($sqlHost, $sqlUsername, $sqlPassword, $sqlDatabase);
-$template           = new Template();
-$crm                = new CRM();
-$loginMedewerker    = new Login();
-$rechten            = new Rechten();
-$medewerkerBeheer   = new Beheer();
+$template           = new Template(true);
+$loginKlanten       = new LoginKlant();
+$loginMedewerkers   = new LoginMedewerker();
+$registratie        = new Registratie();
+$pakketten          = new Pakketten();
+$nieuws             = new Nieuws();
+
+session_start();
 ?>

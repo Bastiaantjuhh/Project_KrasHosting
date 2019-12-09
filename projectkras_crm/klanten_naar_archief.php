@@ -1,12 +1,13 @@
-<?php //if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
-if ($rechten->getRechten("r_verwijderen", $_SESSION["medewerker"]) === "0") {
+if ($rechten->getRechten("r_verwijderen", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     $content = '<h1 class="mt-4">Klanten</h1>';
     $content .= '<p>Klant is naar het archief verplaatst</p>';
-    $content .= $crm->doKlantToArchief($_GET["id"]);
+    $content .= $crm->klantNaarArchief($_GET["id"]);
 }
 ?>
 <!DOCTYPE html>

@@ -1,11 +1,12 @@
-<?php //if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
-if ($rechten->getRechten("r_admin", $_SESSION["medewerker"]) === "0") {
+if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       echo $medewerkerBeheer->nieuweMedewerker($_POST["naam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]));
+       echo $medewerkerBeheer->medewerkerNieuw($_POST["naam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]));
        // TODO: label
        $content = "OK";
     

@@ -1,10 +1,9 @@
 <?php
 class CRM {
-
     private $klantid;
     private $pakketid;
 
-    public function getKlantLijst() {
+    public function Klanten() {
         global $mysql;
 
         $query      = $mysql->query("SELECT id, voornaam, achternaam FROM login_klanten WHERE archief = 0");
@@ -25,7 +24,7 @@ class CRM {
 
     }
 
-    public function getKlantDetails($klantID) {
+    public function klantDetails($klantID) {
         global $mysql;
 
         $query     = $mysql->query("SELECT id, voornaam, achternaam, email, address, huisnummer, postcode, woonplaats FROM login_klanten WHERE id = ".$klantID."");
@@ -73,7 +72,7 @@ class CRM {
 
     }
 
-    public function getKlantDiensten($klantID) {
+    public function klantDiensten($klantID) {
         global $mysql;
 
         $query = $mysql->query("SELECT id_klant, id_pakket FROM crm_klant_bestellingen WHERE id_klant = ".$klantID."");
@@ -92,19 +91,27 @@ class CRM {
     }
 
     // TODO: Afmaken met e.v.t. rechten
-    public function doKlantToArchief($klantID) {
+    public function klantNaarArchief($klantID) {
         global $mysql;
 
         $mysql->query("UPDATE login_klanten SET archief = 1 WHERE  id = '". $klantID ."'");
     }
 
     // TODO
-    public function klantBewerkingLaden($klantID) {
+    public function klantBewerkenForm($klantID) {
         global $mysql;
     }
 
     // TODO
-    public function klantBewerkingOpslaan($klantID) {
+    public function klantBewerken($klantID) {
         global $mysql;
+    }
+
+    public function nieuweKlantForm() {
+
+    }
+
+    public function nieuweKlant() {
+
     }
 }

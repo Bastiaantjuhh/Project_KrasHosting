@@ -1,12 +1,13 @@
-<?php //if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
-if ($rechten->getRechten("r_admin", $_SESSION["medewerker"]) === "0") {
+if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     $content = '<h1 class="mt-4">Medewerker Beheer</h1>';
     $content .= '<a href="medewerker_toevoegen.php">Medewerker toevoegen</a>';
-    $content .= $medewerkerBeheer->getAlleMedewerkers();
+    $content .= $medewerkerBeheer->Medewerkers();
 }
 ?>
 <!DOCTYPE html>

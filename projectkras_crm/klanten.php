@@ -1,4 +1,5 @@
-<?php //if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="nl">
@@ -12,7 +13,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom"><?php echo $template->loadNav(); ?></nav>
             <div class="container-fluid">
                 <h1 class="mt-4">Klanten</h1>
-                <?php echo $crm->getKlantLijst(); ?>
+                <?php echo $crm->Klanten(); ?>
                 </div>
         </div>
     </div>

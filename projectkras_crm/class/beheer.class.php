@@ -1,6 +1,6 @@
 <?php
 class Beheer {
-    public function getAlleMedewerkers() {
+    public function Medewerkers() {
         global $mysql;
 
         $query     = $mysql->query("SELECT id, voornaam, achternaam FROM crm_medewerker_login");
@@ -19,10 +19,10 @@ class Beheer {
         return $content;
     }
 
-    public function getMedewerker($medewerkerID) {
+    public function Medewerker($medewerkerID) {
         global $mysql;
 
-        $query     = $mysql->query("SELECT id, voornaam, achternaam, email FROM crm_medewerker_login WHERE id = ".$medewerkerID."");
+        $query     = $mysql->query("SELECT id, voornaam, achternaam, email FROM crm_medewerker_login WHERE id = ". $medewerkerID ."");
         $content   = "<table>";
     
         while($x = mysqli_fetch_assoc($query)) {
@@ -45,7 +45,7 @@ class Beheer {
         return $content;
     }
 
-    public function nieuweMedewerker($naam, $achternaam, $email, $wachtwoord) {
+    public function medewerkerNieuw($naam, $achternaam, $email, $wachtwoord) {
         global $mysql;
 
         //return "INSERT INTO crm_medewerker_login (voornaam, achternaam, email, wachtwoord) VALUES ('{$naam}', '{$achternaam}', '{$email}', '{$wachtwoord}')";
@@ -53,7 +53,7 @@ class Beheer {
         $mysql->query("INSERT INTO crm_medewerker_login (voornaam, achternaam, email, wachtwoord) VALUES ('{$naam}', '{$achternaam}', '{$email}', '{$wachtwoord}')");
     }
 
-    public function nieuweMedewerkerForm() {
+    public function medewerkerNieuwForm() {
 
         $content = '<form action="" method="POST">';
         $content .= '<input type="text" name="naam" placeholder="Voornaam">';

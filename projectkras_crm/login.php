@@ -1,54 +1,81 @@
+<?php session_start(); ?>
+<?php include "autoload.php"; ?>
 <?php
-include "autoload.php";
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if ($loginMedewerker->doLogin($_POST["email"], $_POST["wachtwoord"]) === true) {
+        header('Location: index.php');
+    } else {
+        $content = "<div class='alert alert-danger'>Incorrect login. probeer het a.u.b. opnieuw</div>";
+        echo $loginMedewerker->showLogin();
+    }
+} else {
+    $content = $loginMedewerker->showLogin();
+}
 ?>
-<!doctype html>
-<html lang="nl">
-    <head>
-        <meta charset="utf-8" />
-        <title>Inloggen</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link href="https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css" rel="stylesheet">
-        <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-            font-size: 3.5rem;
-            }
-        }
-        </style>
-    </head>
-    <body class="text-center">
-    <div class="container">
-        <div id="con">
-            <h1>Log In</h1>
-            <?php
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                if ($loginMedewerker->doLogin($_POST["email"], $_POST["password"]) === true) {
-                    $_SESSION["logged-in"]  = true;
-                    header('Location: index.php');
+<html>
+<head>
+    <title>KrasHosting CRM</title>
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <style>
+    html,
+body {
+  height: 100%;
+}
 
-                    
-                } else {
-                    echo "<div class='redbox'>Incorrect login. probeer het a.u.b. opnieuw</div>";
-                }
-            } else {
-                echo $loginMedewerker->showLogin();
-            }
-            ?>
-        </div>
+body {
 
-    </div>
-    </body>
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
 
-    
+.alert {
+    width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+</head>
+<body class="text-center">
+
+<?php echo $content; ?>
+
+
+</body>
 </html>

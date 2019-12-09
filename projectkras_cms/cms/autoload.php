@@ -17,13 +17,12 @@ if ($debug === true) {
 foreach (glob("class/*.php") as $bestend) { include $bestend; }
 
 $mysql              = new mysqli($sqlHost, $sqlUsername, $sqlPassword, $sqlDatabase);
-$template           = new Template();
+$template           = new Template(false);
 $loginKlanten       = new LoginKlant();
 $loginMedewerkers   = new LoginMedewerker();
 $registratie        = new Registratie();
 $pakketten          = new Pakketten();
 $nieuws             = new Nieuws();
-
 
 session_start();
 ?>
