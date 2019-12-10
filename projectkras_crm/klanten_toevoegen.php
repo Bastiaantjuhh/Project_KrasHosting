@@ -2,27 +2,19 @@
 <?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
+
+// TODO RECHTEN GOEDZETTEN
 if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Lezen & scrijven is wel ingebouwd echter niet in gebruik. 
-        // Bewuste keuze misshien is het namelijk voor later wel nodig.
-        
-        // $rechten->setRechten("r_lezen", $_GET["id"], $_POST["r_lezen"]);
-        // $rechten->setRechten("r_scrijven", $_GET["id"], $_POST["r_scrijven"]);
-
-        $rechten->setRechten("r_verwijderen", $_GET["id"], $_POST["r_verwijderen"]);
-        $rechten->setRechten("r_bewerken", $_GET["id"], $_POST["r_bewerken"]);
-        $rechten->setRechten("r_admin", $_GET["id"], $_POST["r_admin"]);
-        $content = "Gegevens zijn opgeslagen";
+       echo $crm->nieuweKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]), $_POST["address"], $_POST["postcode"], $_POST["nummer"], $_POST["plaats"]);
+       $content = '<h1 class="mt-4">Klant Toevoegen</h1>';
+       $content .= "<p>Klant is successvol toegevoegd</p>";
     
     } else {
-        $content = '<h1 class="mt-4">Medewerker Beheer</h1>'; 
-        $content .= $medewerkerBeheer->Medewerker($_GET["id"]);
-        $content .= '<h1 class="mt-4">Medewerker Rechten</h1>';
-        $content .= $rechten->getRechtenLijst($_GET["id"]);
+        $content = '<h1 class="mt-4">Klant Toevoegen</h1>';
+        $content .= $crm->nieuweKlantForm();
     }
 }
 ?>

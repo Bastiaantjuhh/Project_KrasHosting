@@ -17,7 +17,6 @@
                 
                 <h1 class="mt-4">Diensten</h1>
                 <?php echo $crm->klantDiensten($_GET["id"]); ?>
-                <!-- Diensten van klant komen hier -->
                 </div>
         </div>
     </div>

@@ -28,8 +28,6 @@ class Rechten {
     }
 
     public function getRechtenLijst($medewerkerID) {
-        $items = "<table>";
-
         // Lezen spreekt voor zich, zit er voor zekerheid wel in. Reden hiervoor is dat mocht een 
         // user disabled moeten worden of iets dergelijks het wel mogenlijk is om dat te regelen.
         // Scrijven wordt niet gebruikt op dit moment daarom disabled
@@ -48,29 +46,43 @@ class Rechten {
             $items .= '<td><select id="s" name="r_scrijven"><option value="1">Ja</option><option selected="selected" value="0">Nee</option></select></td>';
         }
         */
+/*
+<div class="form-group"><label for="exampleFormControlSelect1">Example select</label>
+<select name="r_verwijderen" class="form-control" id="exampleFormControlSelect1">
+<option selected="selected" value="1">Ja</option><option value="0">Nee</option>
+</select></div>
 
-        $items .= "</tr><tr><td>Verwijderen: </td>";
+<td><select id="v" name="r_verwijderen"></td>*/
+/*
+        <option selected="selected" value="1">Ja</option><option value="0">Nee</option>
+*/
+        $items = '<form method="POST" action="">';
+        
+        $items .= '<div class="form-group"><label for="v">Verwijderen</label><select name="r_verwijderen" class="form-control" id="exampleFormControlSelect1">';
         if ($this->getRechten("r_verwijderen", $medewerkerID) === "1") {
-            $items .= '<td><select id="v" name="r_verwijderen"><option selected="selected" value="1">Ja</option><option value="0">Nee</option></select></td>';
+            $items .= '<option name="" selected="selected" value="1">Ja</option><option value="0">Nee</option>';
         } else {
-            $items .= '<td><select id="v" name="r_verwijderen"><option value="1">Ja</option><option selected="selected" value="0">Nee</option></select></td>';
+            $items .= '<option value="1">Ja</option><option selected="selected" value="0">Nee</option>';
         }
+        $items .= '</select></div>';
 
-        $items .= "</tr><tr><td>Bewerken: </td>";
+        $items .= '<div class="form-group"><label for="b">Bewerken</label><select name="r_bewerken" class="form-control" id="exampleFormControlSelect1">';
         if ($this->getRechten("r_bewerken", $medewerkerID) === "1") {
-            $items .= '<td><select id="b" name="r_bewerken"><option selected="selected" value="1">Ja</option><option value="0">Nee</option></select></td>';
+            $items .= '<option selected="selected" value="1">Ja</option><option value="0">Nee</option>';
         } else {
-            $items .= '<td><select id="b" name="r_bewerken"><option value="1">Ja</option><option selected="selected" value="0">Nee</option></select></td>';
+            $items .= '<option value="1">Ja</option><option selected="selected" value="0">Nee</option>';
         }
+        $items .= '</select></div>';
 
-        $items .= "</tr><tr><td>Administrator: </td>";
+        $items .= '<div class="form-group"><label for="a">Administrator</label><select name="r_admin" class="form-control" id="exampleFormControlSelect1">';
         if ($this->getRechten("r_admin", $medewerkerID) === "1") {
-            $items .= '<td><select id="a" name="r_admin"><option selected="selected" value="1">Ja</option><option value="0">Nee</option></select></td>';
+            $items .= '<option selected="selected" value="1">Ja</option><option value="0">Nee</option>';
         } else {
-            $items .= '<td><select id="a" name="r_admin"><option value="1">Ja</option><option selected="selected" value="0">Nee</option></select></td>';
+            $items .= '<option value="1">Ja</option><option selected="selected" value="0">Nee</option>';
         }
-
-        $items .= "</tr></table>";
+        $items .= '</select></div>';
+        $items .= '<button type="submit" class="btn btn-primary btn-sm">Opslaan</button></form>';
+        $items .= '</form>';
 
         return $items;
     }

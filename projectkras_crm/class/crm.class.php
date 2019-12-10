@@ -108,10 +108,27 @@ class CRM {
     }
 
     public function nieuweKlantForm() {
-
+        $content = '<form action="" method="POST">';
+        $content .= '<div class="form-group"><label for="voornaam">Voornaam</label><input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
+        $content .= '<div class="form-group"><label for="achternaam">Achternaam</label><input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
+        $content .= '<div class="form-group"><label for="email">E-mail</label><input type="email" class="form-control" name="email" id="email" placeholder="E-mail"></div>';
+        $content .= '<div class="form-group"><label for="wachtwoord">Wachtwoord</label><input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord"></div>';
+        $content .= '<div class="form-group"><label for="address">Address</label><input type="text" class="form-control" name="address" id="address" placeholder="Address"></div>';
+        $content .= '<div class="form-group"><label for="postcode">Postcode</label><input type="text" class="form-control" name="postcode" id="postcode" placeholder="Postcode"></div>';
+        $content .= '<div class="form-group"><label for="nummer">Huisnummer</label><input type="text" class="form-control" name="nummer" id="nummer" placeholder="Huisnummer"></div>';
+        $content .= '<div class="form-group"><label for="plaats">Plaats</label><input type="text" class="form-control" name="plaats" id="plaats" placeholder="Plaats"></div>';
+        $content .= '<button type="submit" class="btn btn-primary">Toevoegen</button></form>';
+        
+        return $content;
     }
+    /*	
+voornaam, achternaam, email, wachtwoord, address, huisnummer, postcode, woonplaats
 
-    public function nieuweKlant() {
+*/
+    // echo $medewerkerBeheer->nieuweKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]), $_POST["address"], $_POST["postcode"], $_POST["nummer"], $_POST["plaats"]);
+    public function nieuweKlant($naam, $achternaam, $email, $wachtwoord, $address, $huisnummer, $postcode, $woonplaats) {
+        global $mysql;
 
+        $mysql->query("INSERT INTO login_klanten (voornaam, achternaam, email, wachtwoord, address, huisnummer, postcode, woonplaats) VALUES ('{$naam}', '{$achternaam}', '{$email}', '{$wachtwoord}', '{$address}', '{$huisnummer}', '{$postcode}', '{$woonplaats}')");
     }
 }

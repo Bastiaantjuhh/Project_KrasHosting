@@ -6,18 +6,13 @@ if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-       echo $medewerkerBeheer->medewerkerNieuw($_POST["naam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]));
-       // TODO: label
-       $content = "OK";
+       echo $medewerkerBeheer->medewerkerNieuw($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], hash("sha1", $_POST["wachtwoord"]));
+       $content = '<h1 class="mt-4">Medewerker Toevoegen</h1>';
+       $content .= "<p>Medewerker is successvol toegevoegd</p>";
     
     } else {
-        $content = '<form action="" method="POST">';
-        $content .= '<input type="text" name="naam" placeholder="Voornaam">';
-        $content .= '<input type="text" name="achternaam" placeholder="Achternaam">';
-        $content .= '<input type="text" name="email" placeholder="E-mail">';
-        $content .= '<input type="password" name="wachtwoord" placeholder="Wachtwoord">';
-        $content .= '<input type="submit">';
-        $content .= '</form>';
+        $content = '<h1 class="mt-4">Medewerker Toevoegen</h1>';
+        $content .= $medewerkerBeheer->medewerkerNieuwForm();
     }
 }
 ?>

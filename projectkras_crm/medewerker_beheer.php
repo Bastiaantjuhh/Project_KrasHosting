@@ -6,7 +6,7 @@ if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
     $content = $template->loadToegangError();
 } else {
     $content = '<h1 class="mt-4">Medewerker Beheer</h1>';
-    $content .= '<a href="medewerker_toevoegen.php">Medewerker toevoegen</a>';
+    $content .= '<a role="button" class="btn btn-primary btn-sm" href="medewerker_toevoegen.php">Medewerker toevoegen</a>';
     $content .= $medewerkerBeheer->Medewerkers();
 }
 ?>

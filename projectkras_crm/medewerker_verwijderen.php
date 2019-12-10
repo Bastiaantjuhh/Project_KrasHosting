@@ -1,6 +1,15 @@
 <?php session_start(); ?>
 <?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
+<?php
+if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
+    $content = $template->loadToegangError();
+} else {
+    $content = "<p>Medewerker verwijderd</p>";
+    echo $medewerkerBeheer->medewerkerVerwijderen($_GET["id"]);
+    header('Location: medewerker_beheer.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -12,10 +21,8 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom"><?php echo $template->loadNav(); ?></nav>
             <div class="container-fluid">
-                <h1 class="mt-4">Klanten</h1>
-                <a role="button" class="btn btn-primary btn-sm" href="klanten_toevoegen.php">Klant toevoegen</a>
-                <?php echo $crm->Klanten(); ?>
-                </div>
+                <?php echo $content; ?>
+            </div>
         </div>
     </div>
     <?php echo $template->loadFooter(); ?>
