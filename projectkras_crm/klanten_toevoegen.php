@@ -2,9 +2,7 @@
 <?php if(!isset($_SESSION["logged-in"])) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
-
-// TODO RECHTEN GOEDZETTEN
-if ($rechten->getRechten("r_admin", $_SESSION["userid"]) === "0") {
+if ($_SESSION["userid"] === "0") {
     $content = $template->loadToegangError();
 } else {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

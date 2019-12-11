@@ -1,0 +1,5 @@
+POST http://127.0.0.1/SCHOOL/KrasHosting/projectkras_cms/cms/login-demo.php HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+email=bastiaan@mail.com
+&wachtwoord=Welkom01

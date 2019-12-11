@@ -13,7 +13,7 @@
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom"><?php echo $template->loadNav(); ?></nav>
             <div class="container-fluid">
                 <h1 class="mt-4">Dashboard</h1>
-                <p>Welkom bij het dashboard van het CMS van KraHosting</p>
+                <p>Welkom bij het dashboard van het CMS van KrasHosting</p>
                 </div>
         </div>
     </div>

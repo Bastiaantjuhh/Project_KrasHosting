@@ -1,5 +1,5 @@
 <?php
-class LoginKlant implements Login{
+class LoginKlant implements Login {
     private $username;
     private $password;
 

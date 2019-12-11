@@ -9,8 +9,6 @@ class Nieuws {
 
         while($row = $query->fetch_assoc()) {
             $content .= "<tr>";
-            //$content .= "<td>";
-            //$content .="</td>";
             $content .= "<td style='width: 100px;'>";
             $content .= htmlspecialchars($row['datum']);
             $content .="</td>";
@@ -20,9 +18,12 @@ class Nieuws {
             $content .= "<td>";
             $content .= htmlspecialchars($row['auteur']);
             $content .="</td>";
-            $content .= "<td>";
-            $content .= htmlspecialchars($row['content']);
-            $content .="</td>";
+
+            if($isAdmin === false) {
+                $content .= "<td>";
+                $content .= htmlspecialchars($row['content']);
+                $content .="</td>";
+            }
 
             if($isAdmin === true) {
                 $content .= "<td>";

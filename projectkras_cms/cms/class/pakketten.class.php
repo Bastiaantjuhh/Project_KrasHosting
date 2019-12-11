@@ -18,10 +18,12 @@ class Pakketten {
             $content .= "<td>";
             $content .= htmlspecialchars($row['prijs']) ;
             $content .="</td>";
-            $content .= "<td>";
-            $content .= htmlspecialchars($row['inhoud']);
-            $content .="</td>";
 
+            if($isAdmin === false) {
+                $content .= "<td>";
+                $content .= htmlspecialchars($row['inhoud']);
+                $content .="</td>";
+            }
             if($isAdmin === true) {
                 $content .= "<td>";
                 $content .= "<div class='btn-group' role='group'><a class='btn btn-primary btn-sm' role='button' href='pakketten_bewerken.php?id=". $row['id'] ."'>wijzigen</a>";

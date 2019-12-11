@@ -1,5 +1,5 @@
 <?php
-class LoginMedewerker implements Login{
+class LoginMedewerker implements Login {
     private $username;
     private $password;
 
