@@ -1,7 +1,10 @@
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"]) || !$_SESSION["medewerker"] === true) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $pakketten->updatePakket($_GET["id"], $_POST["naam"], $_POST["prijs"], $_POST["inhoud"]);
+    header("Location: pakketten.php");
 } 
 else {
     $content = $pakketten->updatePakketForm($_GET["id"]);

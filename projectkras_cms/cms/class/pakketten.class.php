@@ -9,9 +9,9 @@ class Pakketten {
 
         while($row = $result->fetch_assoc()) {
             $content .= "<tr>";
-            $content .= "<td>";
-            $content .= htmlspecialchars($row['id']) ;
-            $content .="</td>";
+            //$content .= "<td>";
+            //$content .= htmlspecialchars($row['id']) ;
+            //$content .="</td>";
             $content .= "<td height='50px'>";
             $content .= htmlspecialchars($row['naam']) ;
             $content .="</td>";
@@ -24,10 +24,8 @@ class Pakketten {
 
             if($isAdmin === true) {
                 $content .= "<td>";
-                $content .= "<a class='btn btn-primary btn-sm' role='button' href='pakketten_bewerken.php?id=". $row['id'] ."'>wijzigen</a>";
-                $content .= "<td>";
-                $content .= "<td>";
-                $content .= "<a class='btn btn-danger btn-sm' role='button'  href='pakketten_verwijderen.php?id=". $row['id'] ."'>verwijderen</a>";
+                $content .= "<div class='btn-group' role='group'><a class='btn btn-primary btn-sm' role='button' href='pakketten_bewerken.php?id=". $row['id'] ."'>wijzigen</a>";
+                $content .= "<a class='btn btn-danger btn-sm' role='button'  href='pakketten_verwijderen.php?id=". $row['id'] ."'>verwijderen</a></div>";
                 $content .="</td>";
             }
 
@@ -65,9 +63,6 @@ class Pakketten {
         return $content;
     }
 
-    // TODO: toevoegen & wekend krijge
-    //
-    // SQL QUERY: "UPDATE `pakketten` SET `id`=[value-1],`naam`=[value-2],`prijs`=[value-3],`inhoud`=[value-4] WHERE 1"
     public function updatePakket($pakketID, $naam, $prijs, $inhoud) {
         global $mysql;
         $mysql->query("UPDATE pakketten SET naam = '{$naam}', prijs = '{$prijs}', inhoud = '{$inhoud}' WHERE id = {$pakketID}");

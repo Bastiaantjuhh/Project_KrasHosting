@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"]) || !$_SESSION["medewerker"] === true) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="nl">

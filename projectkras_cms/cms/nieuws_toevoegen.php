@@ -1,7 +1,9 @@
+<?php session_start(); ?>
+<?php if(!isset($_SESSION["logged-in"]) || !$_SESSION["medewerker"] === true) { header('Location: login.php'); } ?>
 <?php include "autoload.php"; ?>
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $content = $nieuws->toevoegenNieuws($_POST["datum"], $_POST["titel"], $_POST["auteur"], $_POST["content"]);
+    $content = $nieuws->toevoegenNieuws(date("d-m-Y"), $_POST["titel"], $_SESSION["u_realname"], $_POST["content"]);
  
 } 
 else {

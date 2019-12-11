@@ -14,7 +14,9 @@ class CRM {
         $content .= "<tr>";
         $content .= "<td>" . htmlspecialchars($x["voornaam"]) ."</td>";
         $content .= "<td>" . htmlspecialchars($x["achternaam"]) ."</td>";
-        $content .= "<td><a role='button' class='btn btn-primary btn-sm' href='klanten_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
+        $content .= "<td><div class='btn-group' role='group'><a role='button' class='btn btn-primary btn-sm' href='klanten_details.php?id=". htmlspecialchars($x["id"])."'>Details</a>";
+        $content .= "<a role='button' class='btn btn-primary btn-sm' href='klanten_bewerken.php?id=". htmlspecialchars($x["id"])."'>Bewerken</a>";
+        $content .= "<a role='button' class='btn btn-danger btn-sm' href='klanten_naar_archief.php?id=". htmlspecialchars($x["id"])."'>Archieveer</a></div>";
         $content .= "</tr>";
         }
     
@@ -60,10 +62,10 @@ class CRM {
                 $content .= "<td>Woonplaats: </td>";
                 $content .= "<td>" . htmlspecialchars($x["woonplaats"]) ."</td>";
             $content .= "</tr>";
-            $content .= "<tr>";
-                $content .= "<td></td>";
-                $content .= "<td><a role='button' class='btn btn-danger btn-sm' href='klanten_naar_archief.php?id=". htmlspecialchars($x["id"])."'>Archieveer</a></td>";
-            $content .= "</tr>";
+            //$content .= "<tr>";
+            ///    $content .= "<td></td>";
+            //    $content .= "<td><a role='button' class='btn btn-danger btn-sm' href='klanten_naar_archief.php?id=". htmlspecialchars($x["id"])."'>Archieveer</a></td>";
+            //$content .= "</tr>";
         }
     
         $content .= "</table>";
@@ -100,23 +102,68 @@ class CRM {
     // TODO
     public function klantBewerkenForm($klantID) {
         global $mysql;
+
+        $query = $mysql->query("SELECT voornaam,achternaam,email,address,huisnummer,postcode,woonplaats FROM login_klanten WHERE id = ".$klantID."");
+
+        while($x = mysqli_fetch_assoc($query)) {
+            $content = '<form action="" method="POST">';
+
+            $content .= '<div class="form-row">';
+            $content .= '<div class="form-group col"><label for="voornaam">Voornaam</label><input value="'. $x["voornaam"] .'" type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
+            $content .= '<div class="form-group col"><label for="achternaam">Achternaam</label><input value="'. $x["achternaam"] .'" type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
+            $content .= '</div>';
+
+            $content .= '<div class="form-row">';
+            $content .= '<div class="form-group col"><label for="email">E-mail</label><input value="'. $x["email"] .'" type="email" class="form-control" name="email" id="email" placeholder="E-mail"></div>';
+            $content .= '</div>';
+
+            $content .= '<div class="form-row">';
+            $content .= '<div class="form-group col"><label for="address">Address</label><input value="'. $x["address"] .'" type="text" class="form-control" name="address" id="address" placeholder="Address"></div>';
+            $content .= '<div class="form-group col"><label for="postcode">Postcode</label><input value="'. $x["postcode"] .'" type="text" class="form-control" name="postcode" id="postcode" placeholder="Postcode"></div>';
+            $content .= '</div>';
+
+            $content .= '<div class="form-row">';
+            $content .= '<div class="form-group col"><label for="nummer">Huisnummer</label><input value="'. $x["huisnummer"] .'" type="text" class="form-control" name="nummer" id="nummer" placeholder="Huisnummer"></div>';
+            $content .= '<div class="form-group col"><label for="plaats">Plaats</label><input value="'. $x["woonplaats"] .'"  type="text" class="form-control" name="plaats" id="plaats" placeholder="Plaats"></div>';
+            $content .= '</div>';
+
+            $content .= '<button type="submit" class="btn btn-primary">Opslaan</button></form>';
+        }
+
+        
+        
+        return $content;
     }
 
     // TODO
-    public function klantBewerken($klantID) {
+    public function klantBewerken($id, $voornaam, $achternaam, $email, $address, $postcode, $huisnummer, $plaats) {
         global $mysql;
+        $mysql->query("UPDATE login_klanten SET voornaam = '{$voornaam}', achternaam = '{$achternaam}', email = '{$email}', address = '{$address}', postcode = '{$postcode}', huisnummer = '{$huisnummer}', woonplaats = '{$plaats}' WHERE id = {$id}");
     }
 
     public function nieuweKlantForm() {
         $content = '<form action="" method="POST">';
-        $content .= '<div class="form-group"><label for="voornaam">Voornaam</label><input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
-        $content .= '<div class="form-group"><label for="achternaam">Achternaam</label><input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
-        $content .= '<div class="form-group"><label for="email">E-mail</label><input type="email" class="form-control" name="email" id="email" placeholder="E-mail"></div>';
-        $content .= '<div class="form-group"><label for="wachtwoord">Wachtwoord</label><input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord"></div>';
-        $content .= '<div class="form-group"><label for="address">Address</label><input type="text" class="form-control" name="address" id="address" placeholder="Address"></div>';
-        $content .= '<div class="form-group"><label for="postcode">Postcode</label><input type="text" class="form-control" name="postcode" id="postcode" placeholder="Postcode"></div>';
-        $content .= '<div class="form-group"><label for="nummer">Huisnummer</label><input type="text" class="form-control" name="nummer" id="nummer" placeholder="Huisnummer"></div>';
-        $content .= '<div class="form-group"><label for="plaats">Plaats</label><input type="text" class="form-control" name="plaats" id="plaats" placeholder="Plaats"></div>';
+
+        $content .= '<div class="form-row">';
+        $content .= '<div class="form-group col"><label for="voornaam">Voornaam</label><input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
+        $content .= '<div class="form-group col"><label for="achternaam">Achternaam</label><input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
+        $content .= '</div>';
+
+        $content .= '<div class="form-row">';
+        $content .= '<div class="form-group col"><label for="email">E-mail</label><input type="email" class="form-control" name="email" id="email" placeholder="E-mail"></div>';
+        $content .= '<div class="form-group col"><label for="wachtwoord">Wachtwoord</label><input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord"></div>';
+        $content .= '</div>';
+
+        $content .= '<div class="form-row">';
+        $content .= '<div class="form-group col"><label for="address">Address</label><input type="text" class="form-control" name="address" id="address" placeholder="Address"></div>';
+        $content .= '<div class="form-group col"><label for="postcode">Postcode</label><input type="text" class="form-control" name="postcode" id="postcode" placeholder="Postcode"></div>';
+        $content .= '</div>';
+
+        $content .= '<div class="form-row">';
+        $content .= '<div class="form-group col"><label for="nummer">Huisnummer</label><input type="text" class="form-control" name="nummer" id="nummer" placeholder="Huisnummer"></div>';
+        $content .= '<div class="form-group col"><label for="plaats">Plaats</label><input type="text" class="form-control" name="plaats" id="plaats" placeholder="Plaats"></div>';
+        $content .= '</div>';
+
         $content .= '<button type="submit" class="btn btn-primary">Toevoegen</button></form>';
         
         return $content;

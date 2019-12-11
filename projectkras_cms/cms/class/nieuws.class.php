@@ -9,9 +9,9 @@ class Nieuws {
 
         while($row = $query->fetch_assoc()) {
             $content .= "<tr>";
-            $content .= "<td>";
-            $content .="</td>";
-            $content .= "<td>";
+            //$content .= "<td>";
+            //$content .="</td>";
+            $content .= "<td style='width: 100px;'>";
             $content .= htmlspecialchars($row['datum']);
             $content .="</td>";
             $content .= "<td>";
@@ -26,10 +26,8 @@ class Nieuws {
 
             if($isAdmin === true) {
                 $content .= "<td>";
-                $content .= "<a class='btn btn-primary btn-sm' role='button' href='nieuws_bewerken.php?id=". $row['id'] ."'>wijzigen</a>";
-                $content .= "<td>";
-                $content .= "<td>";
-                $content .= "<a class='btn btn-danger btn-sm' role='button'  href='nieuws_verwijderen.php?id=". $row['id'] ."'>verwijderen</a>";
+                $content .= "<div class='btn-group' role='group'><a class='btn btn-primary btn-sm' role='button' href='nieuws_bewerken.php?id=". $row['id'] ."'>wijzigen</a>";
+                $content .= "<a class='btn btn-danger btn-sm' role='button'  href='nieuws_verwijderen.php?id=". $row['id'] ."'>verwijderen</a></div>";
                 $content .="</td>";
             }
             
@@ -48,9 +46,9 @@ class Nieuws {
 
     public function toevoegenNieuwsForm() {
         $content = '<form action="" method="POST">';
-        $content .= '<div class="form-group"><label for="datum">Datum:</label><input type="text" class="form-control" id="datum" name="datum" placeholder="Datum"></div>';
+        $content .= '<div class="form-group"><label for="datum">Datum:</label><input value='. date("d-m-Y") .' type="text" class="form-control" id="datum" name="datum" placeholder="Datum" disabled></div>';
         $content .= '<div class="form-group"><label for="titel">Titel:</label><input type="text" class="form-control" id="titel" name="titel" placeholder="Titel"></div>';
-        $content .= '<div class="form-group"><label for="auteur">Auteur:</label><input type="text" class="form-control" id="auteur" name="auteur" placeholder="Auteur"></div>';
+        $content .= '<div class="form-group"><label for="auteur">Auteur:</label><input type="text" class="form-control" id="auteur" name="auteur" value="'. $_SESSION["u_realname"] .'" placeholder="Auteur" disabled></div>';
         $content .= '<div class="form-group"><label for="content">Content:</label><textarea type="text" class="form-control" id="content" rows="6" name="content" placeholder="Content"></textarea></div>';
         $content .= '<button type="submit" class="btn btn-primary">Opslaan</button></form>';
 

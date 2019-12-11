@@ -23,6 +23,4 @@ $loginMedewerkers   = new LoginMedewerker();
 $registratie        = new Registratie();
 $pakketten          = new Pakketten();
 $nieuws             = new Nieuws();
-
-session_start();
 ?>

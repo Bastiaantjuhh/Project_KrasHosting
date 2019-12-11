@@ -10,8 +10,8 @@ class Beheer {
             $content .= "<tr>";
             $content .= "<td>" . htmlspecialchars($x["voornaam"]) ."</td>";
             $content .= "<td>" . htmlspecialchars($x["achternaam"]) ."</td>";
-            $content .= "<td><a role='button' class='btn btn-primary btn-sm' href='medewerker_beheer_details.php?id=". htmlspecialchars($x["id"])."'>Details</a></td>";
-            $content .= "<td><a role='button' class='btn btn-danger btn-sm' href='medewerker_verwijderen.php?id=". htmlspecialchars($x["id"])."'>Verwijderen</a></td>";
+            $content .= "<td><div class='btn-group' role='group'><a role='button' class='btn btn-primary btn-sm' href='medewerker_beheer_details.php?id=". htmlspecialchars($x["id"])."'>Details</a>";
+            $content .= "<a role='button' class='btn btn-danger btn-sm' href='medewerker_verwijderen.php?id=". htmlspecialchars($x["id"])."'>Verwijderen</a></div></td>";
             $content .= "</tr>";
         }
     
@@ -54,8 +54,10 @@ class Beheer {
 
     public function medewerkerNieuwForm() {
         $content = '<form action="" method="POST">';
-        $content .= '<div class="form-group"><label for="voornaam">Voornaam</label><input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
-        $content .= '<div class="form-group"><label for="achternaam">Achternaam</label><input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
+        $content .= '<div class="form-row">';
+        $content .= '<div class="form-group col"><label for="voornaam">Voornaam</label><input type="text" class="form-control" name="voornaam" id="voornaam" placeholder="Voornaam"></div>';
+        $content .= '<div class="form-group col"><label for="achternaam">Achternaam</label><input type="text" class="form-control" name="achternaam" id="achternaam" placeholder="Achternaam"></div>';
+        $content .= '</div>';
         $content .= '<div class="form-group"><label for="email">E-mail</label><input type="email" class="form-control" name="email" id="email" placeholder="E-mail"></div>';
         $content .= '<div class="form-group"><label for="wachtwoord">Wachtwoord</label><input type="password" class="form-control" name="wachtwoord" id="wachtwoord" placeholder="Wachtwoord"></div>';
         $content .= '<button type="submit" class="btn btn-primary">Toevoegen</button></form>';
