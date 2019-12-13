@@ -5,7 +5,7 @@ class Pakketten {
 
         $query      = "SELECT * FROM pakketten";
         $result     = $mysql->query($query);
-        $content    = "<table>";
+        $content    = "<table class='table-pakketten'>";
 
         while($row = $result->fetch_assoc()) {
             $content .= "<tr>";

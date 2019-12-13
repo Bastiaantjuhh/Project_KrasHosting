@@ -5,22 +5,22 @@ class Nieuws {
 
         $query = $mysql->query("SELECT id, datum, titel, auteur, content FROM news");
 
-        $content = "<table>";
+        $content = "<table class='table-nieuws'>";
 
         while($row = $query->fetch_assoc()) {
             $content .= "<tr>";
-            $content .= "<td style='width: 100px;'>";
+            $content .= "<td class='td-datum' style='width: 100px;'>";
             $content .= htmlspecialchars($row['datum']);
             $content .="</td>";
-            $content .= "<td>";
+            $content .= "<td class='td-titel'>";
             $content .= htmlspecialchars($row['titel']);
             $content .="</td>";
-            $content .= "<td>";
+            $content .= "<td class='td-auteur'>";
             $content .= htmlspecialchars($row['auteur']);
             $content .="</td>";
 
             if($isAdmin === false) {
-                $content .= "<td>";
+                $content .= "<td class='td-content'>";
                 $content .= htmlspecialchars($row['content']);
                 $content .="</td>";
             }
