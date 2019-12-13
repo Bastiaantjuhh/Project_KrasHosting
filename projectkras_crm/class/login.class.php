@@ -42,7 +42,7 @@ class Login {
         $content .= '<label for="wachtwoord" class="sr-only">Wachtwoord</label>';
         $content .= '<input name="wachtwoord" type="password" id="wachtwoord" class="form-control" placeholder="Wachtwoord" required>';
         $content .= '<button class="btn btn-lg btn-primary btn-block" type="submit">Inloggen</button>';
-        $content .= '<p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>';
+        $content .= '<p class="mt-5 mb-3 text-muted">Copyright &copy; ' . date("Y") . ' KrasHosting - Alle rechten voorbehouden.</p>';
         $content .= '</form>';
 
         return $content;
