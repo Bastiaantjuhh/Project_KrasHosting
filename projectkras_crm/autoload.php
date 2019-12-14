@@ -22,4 +22,5 @@ $crm                = new CRM();
 $loginMedewerker    = new Login();
 $rechten            = new Rechten();
 $medewerkerBeheer   = new Beheer();
+$bestanden          = new Bestanden();
 ?>

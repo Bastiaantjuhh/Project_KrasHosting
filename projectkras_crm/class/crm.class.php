@@ -85,11 +85,18 @@ class CRM {
             $idPakketLoad = $x["id_pakket"];
             $query2 = $mysql->query("SELECT id, naam FROM pakketten WHERE id = '{$idPakketLoad}'");
 
-            while($y = mysqli_fetch_assoc($query2)) { $content .= "<li>". $y["naam"] ."</li>"; }  
+            while($y = mysqli_fetch_assoc($query2)) { 
+                $content .= "<li>". $y["naam"] ."</li>"; 
+            }  
         }
 
         $content .= "</ul>";
-        return $content;
+
+        if($content === "<ul></ul>") {
+            return "<p>Klant heeft nog geen diensten op zijn of haar naam staan</p>";
+        } else {
+            return $content;  
+        }
     }
 
     // TODO: Afmaken met e.v.t. rechten

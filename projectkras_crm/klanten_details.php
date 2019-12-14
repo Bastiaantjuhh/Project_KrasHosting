@@ -17,6 +17,10 @@
                 
                 <h1 class="mt-4">Diensten</h1>
                 <?php echo $crm->klantDiensten($_GET["id"]); ?>
+
+                <h1 class="mt-4">Bestanden</h1>
+                <?php echo $bestanden->getBestanden($_GET["id"]); ?>
+
                 </div>
         </div>
     </div>
