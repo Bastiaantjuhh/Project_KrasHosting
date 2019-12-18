@@ -5,7 +5,7 @@ include "autoload.php";
 $content = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if ($loginKlanten->doLogin($_POST["email"], $_POST["wachtwoord"]) === true) {
+    if ($loginKlanten->doLogin($_POST["email"], $_POST["wachtwoord"]) == true) {
         //header('Location: index.php');
         echo "successvol";
     } else {

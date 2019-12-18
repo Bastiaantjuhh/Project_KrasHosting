@@ -11,7 +11,9 @@ class LoginKlant implements Login {
         $this->username = $username;
         $this->password = $password2;
 
-        $queryLogin = $mysql->query("SELECT email,wachtwoord FROM login_klanten WHERE email = '". $username ."' AND wachtwoord = '". $password2 ."'");
+        $q = "SELECT email,wachtwoord FROM login_klanten WHERE email = '{$username}' AND wachtwoord = '{$password2}'";
+
+        $queryLogin = $mysql->query($q);
         
         if ($queryLogin->num_rows > 0) {
             $this->correctLogin($username);
@@ -19,7 +21,7 @@ class LoginKlant implements Login {
         } else {
             $this->incorrectLogin($username);
             return false;
-        }     
+        } 
     }
 
     public function resetIncorrectPassCount($username) {
@@ -28,31 +30,29 @@ class LoginKlant implements Login {
     }
 
     public function incorrectLogin($username) {
-       global $mysql;
-       $mysql->query("UPDATE login_klanten SET wachtwoord_counter = wachtwoord_counter + 1 WHERE  email = '". $username ."'");
-
-       echo $this->suspendedAccount($username);
+        //if ($this->suspendedCheck($username) === false) {
+            global $mysql;
+            $mysql->query("UPDATE login_klanten SET wachtwoord_counter = (wachtwoord_counter + 1) WHERE email = '". $username ."'");
+        //} else {
+        //    echo "<div class='alert alert-danger'>Account is geblokeerd. Contacteer beheerder a.u.b.</div>";
+        //}
     }
 
     public function correctLogin($username) {
         if ($this->suspendedCheck($username) === false) {
+
             $this->resetIncorrectPassCount($username);
 
+            // Wordt gebruikt om te kijken of gebruiker ingelogd zit
             $_SESSION["logged-in"]  = true;
-            $_SESSION["isadmin"]    = false;
-            $_SESSION["user"]       = $username;
+
+            // Wordt gebruikt voor aanmaken van de "USERID" session
+            $_SESSION["username"]   = $username;
+
+            // Is Klant?
+            $_SESSION["klant"]      = true;
         } else {
-            echo "<p class='rood'>Account is geblokeerd. Contacteer beheerder a.u.b.</p>";
-        }
-    }
-
-    public function suspendedAccount($username) {
-        global $mysql;
-
-        $querySusspend = $mysql->query("SELECT email,wachtwoord_counter FROM login_klanten WHERE email = '". $username ."' AND wachtwoord_counter = 3");
-
-        if ($querySusspend->num_rows > 0) { 
-            $mysql->query("UPDATE login_klanten SET suspended = true WHERE  email = '". $username ."'");
+            echo "<div class='alert alert-danger'>Account is geblokeerd. Contacteer beheerder a.u.b.</div>";
         }
     }
 
@@ -71,7 +71,7 @@ class LoginKlant implements Login {
     public function showLogin() {
         $page = "<form action=\"\" method=\"post\">
                     <input type=\"email\" name=\"email\" placeholder=\"E-mail address\">
-                    <input type=\"password\" name=\"password\" placeholder=\"Wachtwoord\">
+                    <input type=\"password\" name=\"wachtwoord\" placeholder=\"Wachtwoord\">
                     <input type=\"submit\" value=\"Login\">
                 </form>";
 

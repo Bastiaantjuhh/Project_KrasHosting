@@ -13,16 +13,19 @@ class Pakketten {
             //$content .= htmlspecialchars($row['id']) ;
             //$content .="</td>";
             $content .= "<td height='50px'>";
-            $content .= htmlspecialchars($row['naam']) ;
+            $content .= htmlspecialchars($row['naam']);
             $content .="</td>";
             $content .= "<td>";
-            $content .= htmlspecialchars($row['prijs']) ;
+            $content .= htmlspecialchars($row['prijs']);
             $content .="</td>";
 
             if($isAdmin === false) {
                 $content .= "<td>";
                 $content .= htmlspecialchars($row['inhoud']);
                 $content .="</td>";
+                $content .= "<td>";
+                $content .= '<a href="maak_bestelling.php?pakket='. htmlspecialchars($row['id']) .'">Bestel</a>';
+                $content .= "</td>";
             }
             if($isAdmin === true) {
                 $content .= "<td>";
@@ -89,6 +92,11 @@ class Pakketten {
         global $mysql;
 
         $mysql->query("DELETE FROM pakketten WHERE id = {$pakketID}");
+    }
+
+    public function maakBestelling($pakketID, $klantID) {
+        global $mysql;
+        $mysql->query("INSERT INTO crm_klant_bestellingen (id_pakket, id_klant) VALUES ('$pakketID', '{$klantID}')");
     }
 }
 ?>
