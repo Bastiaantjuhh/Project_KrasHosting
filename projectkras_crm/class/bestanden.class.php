@@ -47,7 +47,7 @@ class Bestanden {
     public function uploadForm() {
         $content = '<form action="" method="POST" enctype="multipart/form-data">';
         $content .= '<input type="file" name="file" id="file">';
-        $content .= '<input type="submit" value="Upload Image" name="submit">';
+        $content .= '<input type="submit" value="Upload" name="submit">';
         $content .=  '</form>';
 
         return $content;

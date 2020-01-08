@@ -30,12 +30,8 @@ class LoginKlant implements Login {
     }
 
     public function incorrectLogin($username) {
-        //if ($this->suspendedCheck($username) === false) {
-            global $mysql;
-            $mysql->query("UPDATE login_klanten SET wachtwoord_counter = (wachtwoord_counter + 1) WHERE email = '". $username ."'");
-        //} else {
-        //    echo "<div class='alert alert-danger'>Account is geblokeerd. Contacteer beheerder a.u.b.</div>";
-        //}
+        global $mysql;
+        $mysql->query("UPDATE login_klanten SET wachtwoord_counter = (wachtwoord_counter + 1) WHERE email = '". $username ."'");
     }
 
     public function correctLogin($username) {

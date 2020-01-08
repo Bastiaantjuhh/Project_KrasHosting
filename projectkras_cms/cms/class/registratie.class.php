@@ -18,30 +18,32 @@ class Registratie {
         return $page;
     }
 
+    // TODO:    Backend vallitatie voor invoervelden
+    //          Alleen aanmaken als er tijd voor is.
     public function checkMail($input)                               { return true; }
     public function checkTextOnly($input)                           { return true; }
     public function checkPassword($password, $passwordControlle)    { return true; }
     public function checkHuisnummer($input)                         { return true; }
     public function checkPostcode($input)                           { return true; }
 
-    public function postRegistratie($voornaam, $achternaam, $email, $wachtwoord, $wachtwoordControlle, $address, $huisnummer, $postcode, $woonplaats) {
+    public function postRegistratie($voornaam, $achternaam, $email, $wachtwoord, $address, $huisnummer, $postcode, $woonplaats) {
+        $password2 = hash("sha1", $wachtwoord);
+
+        global $mysql;
+
+        $mysql->query("INSERT INTO login_klanten (voornaam, achternaam, email, wachtwoord, address, huisnummer, postcode, woonplaats) VALUES ('{$voornaam}', '{$achternaam}', '{$email}', '{$password2}', '{$address}', '{$huisnummer}', '{$postcode}', '{$woonplaats}')");
         
+        // TODO:    Backend vallitatie voor invoervelden
+        //          Alleen aanmaken als er tijd voor is.
+        /*
         if($this->checkTextOnly($voornaam) === true)                            { $voornaamCheck = true; }      else { $voornaamCheck = false; }
         if($this->checkTextOnly($achternaam) === true)                          { $achternaamCheck = true; }    else { $achternaamCheck = false; }
         if($this->checkMail($email) === true)                                   { $emailCheck = true; }         else { $emailCheck = false; }
-        if($this->checkPassword($wachtwoord, $wachtwoordControlle) === true)    { $wachtwoordCheck = true; }    else { $wachtwoordCheck = false; }
         if($this->checkTextOnly($address) === true)                             { $addresssCheck = true; }      else { $addresssCheck = false; }
         if($this->checkHuisnummer($huisnummer) === true)                        { $huisnummerCheck = true; }    else { $huisnummerCheck = false; }
         if($this->checkPostcode($postcode) === true)                            { $postcodeCheck = true; }      else { $postcodeCheck = false; }
         if($this->checkTextOnly($woonplaats) === true)                          { $woonplaatsCheck = true; }    else { $woonplaatsCheck = false; }
-
-        if($voornaamCheck === true && $achternaamCheck === true && $emailCheck === true && $wachtwoordCheck === true && $addresssCheck === true && $huisnummerCheck === true && $postcodeCheck === true && $woonplaatsCheck === true) {
-            return true;
-        } else {
-            return false;
-       }
-
-
+        */
     }
 }
 ?>
